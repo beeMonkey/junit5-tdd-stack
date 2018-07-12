@@ -1,5 +1,6 @@
 package com.thoughtworks.tdd;
 
+import java.util.BitSet;
 import java.util.HashMap;
 
 public class ParkingLot {
@@ -11,7 +12,7 @@ public class ParkingLot {
     }
 
     public boolean isFull() {
-     return this.size-parkcars.size()==0;
+     return this.size==0;
     }
 
     public Receipt park(Car car) {
@@ -31,5 +32,13 @@ public class ParkingLot {
         this.size++;
        return parkcars.remove(receipt);
         //return this.parkcars.get(receipt);
+    }
+
+    public int getSize() {
+        return this.size;
+    }
+
+    public HashMap<Receipt,Car> getparkcars() {
+        return this.parkcars;
     }
 }
