@@ -9,15 +9,19 @@ import java.util.ArrayList;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class ParkingBoyTest {
     @Test
     public void should_park_successfully_when_given_park_not_full(){
 
         ParkingLot parkingLot1=mock(ParkingLot.class);
+
+        when(parkingLot1.isFull()).thenReturn(false);
 
         ArrayList<ParkingLot> parkingLots=new ArrayList<>();
 
@@ -38,7 +42,9 @@ public class ParkingBoyTest {
     @Test
     public void should_park_failed_when_given_park_not_full(){
 
-        ParkingLot parkingLot1=new ParkingLot(0);
+        ParkingLot parkingLot1=mock(ParkingLot.class);
+
+        when(parkingLot1.isFull()).thenReturn(true);
 
         ArrayList<ParkingLot> parkingLots=new ArrayList<>();
 
@@ -63,6 +69,8 @@ public class ParkingBoyTest {
     @Test
     public void should_get_specific_car_when_call_unPark_given_receipt_is_right(){
         ParkingLot parkingLot1 = new ParkingLot(1);
+        //when(parkingLot1.isFull()).thenReturn(false);
+
         ArrayList<ParkingLot> parkingLots=new ArrayList<>();
 
         parkingLots.add(parkingLot1);
@@ -72,7 +80,8 @@ public class ParkingBoyTest {
 
         Receipt receipt=parkingBoy.park(theCar);
 
-        assertThat(parkingBoy.unPark(receipt),is(theCar));
+        //assertThat(parkingBoy.unPark(receipt),is(theCar));
+        assertEquals(theCar,parkingBoy.unPark(receipt));
     }
 
     @Test
@@ -106,7 +115,7 @@ public class ParkingBoyTest {
         Receipt receipt1=parkingBoy.park(firstCar);
         Receipt receipt2=parkingBoy.park(secondCar);
 
-        assertThat(parkingLot2.unPark(receipt2),is(parkingBoy.unPark(receipt2)));
+        assertThat(parkingLot1.unPark(receipt1),is(parkingBoy.unPark(receipt1)));
     }
 
 }

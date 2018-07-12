@@ -78,6 +78,7 @@ public class ParkingBoy {
         Car car = null;
         for (ParkingLot parkingLot : parkingLots) {
             car = parkingLot.unPark(receipt);
+            if(car==null)break;
         }
         return car;
     }
