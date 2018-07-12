@@ -20,7 +20,7 @@ public class ParkingLot {
             throw new ParkingLotFullException();
         }
         else {
-            this.size--;
+            //this.size--;
             Receipt receipt=new Receipt();
             this.parkcars.put(receipt,car);
             return receipt;
@@ -29,7 +29,7 @@ public class ParkingLot {
     }
 
     public Car unPark(Receipt receipt) {
-        this.size++;
+        //this.size++;
        return parkcars.remove(receipt);
         //return this.parkcars.get(receipt);
     }

@@ -10,12 +10,14 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class ParkingBoyTest {
     @Test
     public void should_park_successfully_when_given_park_not_full(){
 
-        ParkingLot parkingLot1=new ParkingLot(1);
+        ParkingLot parkingLot1=mock(ParkingLot.class);
 
         ArrayList<ParkingLot> parkingLots=new ArrayList<>();
 
@@ -26,6 +28,7 @@ public class ParkingBoyTest {
         Car car =new Car();
         try {
             parkingBoy.park(car);
+            verify(parkingLot1).park(car);
         }catch(ParkingLotFullException exception){
             fail("should park successfully");
         }
